@@ -5,14 +5,14 @@ import Input from 'components/atoms/Input';
 import Legend from 'components/atoms/Legend';
 import Error from 'components/atoms/Error';
 
-const StyledFieldset = styled.fieldset`
+const StyledFildsetInput = styled.fieldset`
   position: relative;
   border: 2px solid ${ props => props.colorBorder || '#E3E3E3'};
   border-radius: 8px;
 `
 
 
-function Fieldset(props) {
+function FildsetInput(props) {
   const { error, placeholderText, legendText } = props;
   const [ action, setAction ] = useState(false);
   const [ colorState, setColorState ] = useState(null);
@@ -28,14 +28,14 @@ function Fieldset(props) {
   }, [action]) 
 
   return (
-    <StyledFieldset colorBorder={colorState} onFocus={() => setAction(true)} onBlur={() => setAction(false)}>
+    <StyledFildsetInput colorBorder={colorState} onFocus={() => setAction(true)} onBlur={() => setAction(false)}>
       <Legend legendText={legendText} color={colorState}></Legend>
       <Input placeholderText={placeholderText}/>
       { error && <Error errorText={error}/>}
-    </StyledFieldset>
+    </StyledFildsetInput>
   )
 }
 
-Fieldset.propTypes = {}
+FildsetInput.propTypes = {}
 
-export default Fieldset
+export default FildsetInput
