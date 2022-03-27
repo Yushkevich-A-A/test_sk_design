@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledLegend = styled.legend`
-
+const StyledLabel = styled.label`
+  position: absolute;
+  background-color: #FFF;
+  top: -7px;
   font-family: 'SF UI Display';
   font-size: 12px;
   font-style: normal;
@@ -14,17 +16,17 @@ const StyledLegend = styled.legend`
   padding-right: 5px;
 `
 
-function Legend(props) {
-  const { legendText, color } = props;
+function Label(props) {
+  const { labelText, color, opacity } = props;
   
   return (
-    <StyledLegend textColor={color}>{legendText || 'текст не был указан'}</StyledLegend>
+    <StyledLabel textColor={color}>{labelText || 'текст не был указан'}</StyledLabel>
   )
 }
 
-Legend.propTypes = {
-  legendText: PropTypes.string,
+Label.propTypes = {
+  labelText: PropTypes.string,
   color: PropTypes.string,
 }
 
-export default Legend;
+export default Label;

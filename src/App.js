@@ -3,10 +3,9 @@ import './App.css';
 // import Button from './components/atoms/Button';
 // import Input from './components/atoms/Input';
 import Fieldset from './components/molecules/FildsetInput';
-import cities from './assets/JSONData/cities.json';
+import FildsetDropdown from 'components/molecules/FildsetDropdown';
 
 function App() {
-  console.log(cities);
   
   return (
     <div className="App">
@@ -14,7 +13,7 @@ function App() {
         <Fieldset />
       </div>
       <div className="test-mode">
-        // <DropdownList list={cities}/>
+        <FildsetDropdown/>
       </div>
     </div>
   );
