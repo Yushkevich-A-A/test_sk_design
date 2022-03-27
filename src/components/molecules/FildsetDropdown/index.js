@@ -6,7 +6,6 @@ import TextDropdown from 'components/atoms/TextDropdown';
 import Label from 'components/atoms/Label';
 import OpenArrow from 'components/atoms/OpenArrow';
 import DropdownList from '../DropdownList';
-import cities from 'assets/JSONData/cities.json';
 
 
 const StyleFildsetDropdown = styled.fieldset`
@@ -58,7 +57,7 @@ function FildsetDropdown(props) {
         { openList && <TextDropdown text={ itemSelected || ''}/>}
         <OpenArrow type={arrowType}/>
       </WrapperContent>
-      { openList && <DropdownList list={cities} handleClickOnItem={handleSelectItem}/>}
+      { openList && <DropdownList list={list} handleClickOnItem={handleSelectItem}/>}
       { error && <Error errorText={error}/>}
     </StyleFildsetDropdown>
   )

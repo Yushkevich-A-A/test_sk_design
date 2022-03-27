@@ -7,7 +7,7 @@ import Form from 'components/organisms/Form';
 const StiledMain = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 60px;
   padding: 60px;
   padding-top: 12%;

@@ -60,7 +60,7 @@ function Button(props) {
   const { type, message } = props;
 
   return (
-    <StyledButton mode={type}>{ message || type === 'loading' || 'кнопка'}</StyledButton>
+    <StyledButton mode={type}>{ type === 'loading' || message || 'кнопка'}</StyledButton>
   )
 }
 

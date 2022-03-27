@@ -8,9 +8,15 @@ const StyledInput = styled.input`
 `
 
 function Input(props) {
-  const { placeholderText } = props;
+  const { placeholderText, name, inputFor, handleChange, value } = props;
+
   return (
-    <StyledInput placeholder={placeholderText || 'Введите текст'}/>
+    <StyledInput  placeholder={placeholderText || 'Введите текст'} 
+                  name={name} 
+                  id={inputFor} 
+                  onChange={handleChange}
+                  value={value}
+                  />
   )
 }
 

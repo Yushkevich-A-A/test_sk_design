@@ -4,7 +4,13 @@ import styled from 'styled-components';
 import RowForm from 'components/atoms/RowForm';
 import FildsetInput from 'components/molecules/FildsetInput';
 import FildsetDropdown from 'components/molecules/FildsetDropdown';
-import Button from 'components/atoms/Button';
+import AdditionalFormFields from '../AdditionalFormFields';
+import cities from 'assets/JSONData/cities.json';
+import sources from 'assets/JSONData/sources.json';
+import dataDecorator from 'lib/dataDecorator';
+import ButtonState from '../ButtonState';
+import { useSelector } from 'react-redux';
+
 
 const StyledForm = styled.form`
   max-width: 440px;
@@ -18,8 +24,19 @@ const StyledForm = styled.form`
 `
 
 function Form(props) {
+  const { sendReady } = useSelector( state => state.sendState )
+
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    if (!sendReady) {
+      return;
+    }
+    console.log('выполняем отправку на сервер');
+  }
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmitForm}>
       <RowForm>
         <FildsetInput placeholderText='Иван' labelText='Ваше имя *'/>
         <FildsetInput placeholderText='+7 (000) 000-00-00' labelText='Номер телефона *'/>
@@ -28,14 +45,14 @@ function Form(props) {
         <FildsetInput placeholderText='example@skdesign.ru' labelText='E-mail *'/>
         <FildsetInput placeholderText='instagram.com/skde…' labelText='Ссылка на профиль *'/>
       </RowForm>
-      <FildsetDropdown placeholderText='Выберите город *' labelText='Выберите город *'/> 
+      <FildsetDropdown placeholderText='Выберите город *' list={cities}/> 
 
       <FildsetInput placeholderText='SK Design' labelText='Название организации/студии'/>
-
-
-
-      <Button type='disable' message='Отправить заявку'/>
-
+      <AdditionalFormFields>
+        <FildsetInput placeholderText='ФИО' labelText='Получатель'/>
+        <FildsetDropdown placeholderText='От куда узнали про нас?' list={dataDecorator(sources)}/> 
+      </AdditionalFormFields>
+      <ButtonState/>
     </StyledForm>
   )
 }

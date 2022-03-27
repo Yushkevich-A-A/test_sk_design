@@ -18,10 +18,10 @@ const StyledLabel = styled.label`
 `
 
 function Label(props) {
-  const { labelText, color, opacity } = props;
+  const { labelText, color, inputFor } = props;
   
   return (
-    <StyledLabel textColor={color}>{labelText || 'текст не был указан'}</StyledLabel>
+    <StyledLabel textColor={color} htmlFor={inputFor}>{labelText || 'текст не был указан'}</StyledLabel>
   )
 }
 
