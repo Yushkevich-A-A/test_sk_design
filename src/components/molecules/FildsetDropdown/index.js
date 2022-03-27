@@ -24,7 +24,7 @@ const WrapperContent = styled.div`
 `
 
 function FildsetDropdown(props) {
-  const { list, error, placeholderText, labelText } = props;
+  const { list, error, placeholderText} = props;
   const [ openList, setOpenList ] = useState(false);
   const [ colorState, setColorState ] = useState(null);
   const [ arrowType, setArrowType ] = useState('');
@@ -52,9 +52,9 @@ function FildsetDropdown(props) {
 
   return (
     <StyleFildsetDropdown colorBorder={colorState} onClick={handleClick}>
-      {openList && <Label labelText={'От куда узнали про нас?'} color={colorState}></Label>}
+      {openList && <Label labelText={placeholderText} color={colorState}></Label>}
       <WrapperContent>
-        { !openList && <TextDropdown text={ itemSelected || 'От куда узнали про нас?'}/>}
+        { !openList && <TextDropdown text={ itemSelected || placeholderText}/>}
         { openList && <TextDropdown text={ itemSelected || ''}/>}
         <OpenArrow type={arrowType}/>
       </WrapperContent>

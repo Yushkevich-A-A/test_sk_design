@@ -10,6 +10,7 @@ const StyledList = styled.div`
   box-shadow: 0px 5px 20px rgba(53, 50, 56, 0.14);
   border-radius: 8px;
   width: 100%;
+  z-index: 10;
 `
 
 function DropdownList(props) {

@@ -6,6 +6,7 @@ const StyledLabel = styled.label`
   position: absolute;
   background-color: #FFF;
   top: -7px;
+  left: 0;
   font-family: 'SF UI Display';
   font-size: 12px;
   font-style: normal;
