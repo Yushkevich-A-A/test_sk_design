@@ -11,7 +11,6 @@ import dataDecorator from 'lib/dataDecorator';
 import ButtonState from '../ButtonState';
 import { useSelector } from 'react-redux';
 
-
 const StyledForm = styled.form`
   max-width: 440px;
   width: 100%;
@@ -38,19 +37,19 @@ function Form(props) {
   return (
     <StyledForm onSubmit={handleSubmitForm}>
       <RowForm>
-        <FildsetInput placeholderText='Иван' labelText='Ваше имя *'/>
-        <FildsetInput placeholderText='+7 (000) 000-00-00' labelText='Номер телефона *'/>
+        <FildsetInput placeholderText='Иван' labelText='Ваше имя *' name='name' required={true} validitylength={2} />
+        <FildsetInput placeholderText='+7 (000) 000-00-00' labelText='Номер телефона *' name='phone' required={true} validitylength={11}/>
       </RowForm>
       <RowForm>
-        <FildsetInput placeholderText='example@skdesign.ru' labelText='E-mail *'/>
-        <FildsetInput placeholderText='instagram.com/skde…' labelText='Ссылка на профиль *'/>
+        <FildsetInput placeholderText='example@skdesign.ru' labelText='E-mail *' name='mail' required={true} validitylength={11}/>
+        <FildsetInput placeholderText='instagram.com/skde…' labelText='Ссылка на профиль *' name='link' required={true} validitylength={3}/>
       </RowForm>
-      <FildsetDropdown placeholderText='Выберите город *' list={cities}/> 
+      <FildsetDropdown placeholderText='Выберите город *' list={cities} name='city' required={true}/> 
 
-      <FildsetInput placeholderText='SK Design' labelText='Название организации/студии'/>
+      <FildsetInput placeholderText='SK Design' labelText='Название организации/студии' name='name_org'/>
       <AdditionalFormFields>
-        <FildsetInput placeholderText='ФИО' labelText='Получатель'/>
-        <FildsetDropdown placeholderText='От куда узнали про нас?' list={dataDecorator(sources)}/> 
+        <FildsetInput placeholderText='ФИО' labelText='Получатель' name='recipient'/>
+        <FildsetDropdown placeholderText='От куда узнали про нас?' list={dataDecorator(sources)} name='came_from'/> 
       </AdditionalFormFields>
       <ButtonState/>
     </StyledForm>

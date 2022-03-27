@@ -6,6 +6,7 @@ import Input from 'components/atoms/Input';
 import Label from 'components/atoms/Label';
 import Error from 'components/atoms/Error';
 import { useDispatch, useSelector } from 'react-redux';
+import { editItemForm, resetErrorField, setErrorField, setReadyField } from 'store/form/actions';
 
 const StyledFildsetInput = styled.fieldset`
   position: relative;
@@ -16,10 +17,10 @@ const StyledFildsetInput = styled.fieldset`
 
 
 function FildsetInput(props) {
-  const { error, placeholderText, labelText, name} = props;
+  const { placeholderText, labelText, name, required, validitylength } = props;
   const [ action, setAction ] = useState(false);
   const [ colorState, setColorState ] = useState(null);
-  const { [name]: value } = useSelector( store => store.manageForm );
+  const { [name]: dataField } = useSelector( store => store.manageForm );
   const dispatch = useDispatch();
   const idElement = v4();
 
@@ -27,24 +28,57 @@ function FildsetInput(props) {
     if (action) {
       return setColorState('#0086A8'); 
     }
-    if (error) {
+    if (dataField.error) {
       return setColorState('#EB5E55'); 
     } 
     setColorState(null);
   }, [action]);
 
-
   const handleChange = (e) => {
-    console.log(e.target.value);
+    dispatch(editItemForm(name, e.target.value));
+  }
+
+  const handleFocus = () => {
+    setAction(true);
+    if (required) {
+      dispatch(resetErrorField(name));
+    }
+  }
+
+  const handleBlur = () => {
+    setAction(false);
+    if (!required) {
+      return;
+    }
+
+    if (dataField.value === '') {
+      return dispatch(setErrorField(name, 'обязательное поле'))
+    }
+    
+    if (dataField.value.length < validitylength) {
+      return dispatch(setErrorField(name, 'введите полные данные'))
+    }
+
+    dispatch(setReadyField(name));
   }
 
   return (
-    <StyledFildsetInput colorBorder={colorState} onFocus={() => setAction(true)} onBlur={() => setAction(false)}>
-      <Label labelText={labelText} color={colorState} inputFor={idElement}></Label>
-      <Input placeholderText={placeholderText} name={name} inputFor={idElement} handleChange={handleChange} value={value}/>
-      { error && <Error errorText={error}/>}
+    <StyledFildsetInput colorBorder={colorState} onFocus={handleFocus} onBlur={handleBlur}>
+      <Label labelText={labelText} 
+        color={colorState} 
+        inputFor={idElement}
+        ></Label>
+      <Input placeholderText={placeholderText} 
+        name={name} 
+        inputFor={idElement} 
+        handleChange={handleChange} 
+        value={dataField.value}/>
+      { dataField.error && <Error errorText={dataField.error}/>}
     </StyledFildsetInput>
   )
+}
+FildsetInput.defaultProps = {
+  validitylength: 2,
 }
 
 FildsetInput.propTypes = {}

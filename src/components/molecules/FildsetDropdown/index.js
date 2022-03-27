@@ -6,6 +6,8 @@ import TextDropdown from 'components/atoms/TextDropdown';
 import Label from 'components/atoms/Label';
 import OpenArrow from 'components/atoms/OpenArrow';
 import DropdownList from '../DropdownList';
+import { editItemForm, setErrorField, setReadyField } from 'store/form/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const StyleFildsetDropdown = styled.fieldset`
@@ -23,18 +25,19 @@ const WrapperContent = styled.div`
 `
 
 function FildsetDropdown(props) {
-  const { list, error, placeholderText} = props;
+  const { placeholderText, list, labelText, name, required } = props;
   const [ openList, setOpenList ] = useState(false);
   const [ colorState, setColorState ] = useState(null);
   const [ arrowType, setArrowType ] = useState('');
-  const [ itemSelected, setItemSelected ] = useState(null);
+  const { [name]: dataField } = useSelector( store => store.manageForm );
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (openList) {
-
       return setColorState('#0086A8'); 
     }
-    if (error) {
+    if (dataField.error) {
       return setColorState('#EB5E55'); 
     } 
     setColorState(null);
@@ -43,22 +46,34 @@ function FildsetDropdown(props) {
   const handleClick = () => {
     openList ? setArrowType('close') : setArrowType('open');
     setOpenList(!openList);
+    handleValidate(dataField.value);
   }
 
   const handleSelectItem = (item) => {
-    setItemSelected(item);
+    dispatch(editItemForm(name, item));
+    handleValidate(item);
+  }
+
+  const handleValidate = (item) => {
+    if (!required) {
+      return;
+    }
+    if (item === '') {
+      return dispatch(setErrorField(name, 'обязательное поле'))
+    }
+    dispatch(setReadyField(name));
   }
 
   return (
     <StyleFildsetDropdown colorBorder={colorState} onClick={handleClick}>
       {openList && <Label labelText={placeholderText} color={colorState}></Label>}
       <WrapperContent>
-        { !openList && <TextDropdown text={ itemSelected || placeholderText}/>}
-        { openList && <TextDropdown text={ itemSelected || ''}/>}
+        { !openList && <TextDropdown text={ dataField.value || placeholderText}/>}
+        { openList && <TextDropdown text={ dataField.value || ''}/>}
         <OpenArrow type={arrowType}/>
       </WrapperContent>
       { openList && <DropdownList list={list} handleClickOnItem={handleSelectItem}/>}
-      { error && <Error errorText={error}/>}
+      { dataField.error && <Error errorText={dataField.error}/>}
     </StyleFildsetDropdown>
   )
 }

@@ -6,8 +6,7 @@ const StyledError = styled.div`
   font-size: 12px;
   position: absolute;
   color: #EB5E55;
-  padding-top: 8px;
-  padding-left: 15px;
+  bottom: -16px;
   z-index: -1;
 
 `
