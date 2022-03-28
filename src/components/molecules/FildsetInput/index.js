@@ -51,7 +51,6 @@ function FildsetInput(props) {
 
   const handleBlur = (e) => {
     const value = e.target.value;
-
     setAction(false);
     if (!required) {
       return;
@@ -87,10 +86,15 @@ function FildsetInput(props) {
     </StyledFildsetInput>
   )
 }
-FildsetInput.defaultProps = {
-  validitylength: 2,
+
+FildsetInput.propTypes = {
+  placeholderText: PropTypes.string, 
+  labelText: PropTypes.string, 
+  name: PropTypes.string, 
+  required: PropTypes.bool, 
+  regValue: PropTypes.object, 
+  messageError: PropTypes.string, 
+  isPhone: PropTypes.bool
 }
 
-FildsetInput.propTypes = {}
-
-export default FildsetInput
+export default FildsetInput;

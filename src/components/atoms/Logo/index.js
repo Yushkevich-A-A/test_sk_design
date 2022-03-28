@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import logo from 'assets/svg/logo.svg';
 
@@ -9,12 +8,10 @@ const StyledLogo = styled.img`
   max-height: 70px;
 `
 
-function Logo(props) {
+function Logo() {
   return (
     <StyledLogo src={logo} />
   )
 }
 
-Logo.propTypes = {}
-
-export default Logo
+export default Logo;

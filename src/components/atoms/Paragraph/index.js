@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledParagraph = styled.div`
@@ -21,6 +20,4 @@ function Paragraph(props) {
   )
 }
 
-Paragraph.propTypes = {}
-
-export default Paragraph
+export default Paragraph;

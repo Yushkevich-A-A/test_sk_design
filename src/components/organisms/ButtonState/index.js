@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import Button from 'components/atoms/Button'
+import React, { useEffect, useState } from 'react';
+import Button from 'components/atoms/Button';
 import { useSelector } from 'react-redux';
 
-function ButtonState(props) {
+function ButtonState() {
   const { loading, sendReady } = useSelector( state => state.sendState );
   const [ type, setType ] = useState('disable');
 
@@ -22,6 +21,4 @@ function ButtonState(props) {
   )
 }
 
-ButtonState.propTypes = {}
-
-export default ButtonState
+export default ButtonState;

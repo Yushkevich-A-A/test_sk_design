@@ -14,6 +14,8 @@ function TextDropdown(props) {
   )
 }
 
-TextDropdown.propTypes = {}
+TextDropdown.propTypes = {
+  text: PropTypes.string,
+}
 
 export default TextDropdown

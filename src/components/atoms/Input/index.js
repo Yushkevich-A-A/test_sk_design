@@ -22,6 +22,10 @@ function Input(props) {
 
 Input.propTypes = {
   placeholderText: PropTypes.string,
+  name: PropTypes.string,
+  inputFor: PropTypes.string,
+  handleChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default Input;

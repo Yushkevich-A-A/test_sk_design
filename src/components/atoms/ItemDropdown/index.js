@@ -26,6 +26,9 @@ function ItemDropdown(props) {
   )
 }
 
-ItemDropdown.propTypes = {}
+ItemDropdown.propTypes = {
+  item: PropTypes.object,
+  handleClick: PropTypes.func
+};
 
-export default ItemDropdown
+export default ItemDropdown;

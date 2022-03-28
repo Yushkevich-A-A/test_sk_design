@@ -43,16 +43,19 @@ function FildsetDropdown(props) {
   }, [openList, dataField]);
 
   const handleClick = () => {
-    openList ? setArrowType('close') : setArrowType('open');
-    setOpenList(!openList);
+    observeOpenList();
     handleValidate(dataField.value);
   }
 
   const handleSelectItem = (item) => {
-    openList ? setArrowType('close') : setArrowType('open');
+    observeOpenList();
     dispatch(editItemForm(name, item));
-    setOpenList(!openList);
     handleValidate(item);
+  }
+
+  const observeOpenList = () => {
+    openList ? setArrowType('close') : setArrowType('open');
+    setOpenList(!openList);
   }
 
   const handleValidate = (item) => {
@@ -79,6 +82,12 @@ function FildsetDropdown(props) {
   )
 }
 
-FildsetDropdown.propTypes = {}
+FildsetDropdown.propTypes = {
+  placeholderText: PropTypes.string, 
+  list: PropTypes.array, 
+  labelText: PropTypes.string,
+  name: PropTypes.string, 
+  required: PropTypes.bool
+}
 
 export default FildsetDropdown;

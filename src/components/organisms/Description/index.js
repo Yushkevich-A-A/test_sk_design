@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from 'components/atoms/Logo';
 import H2 from 'components/atoms/H2';
@@ -10,8 +9,7 @@ const StyledDescription = styled.div`
   max-width: 940px;
 `
 
-
-function Description(props) {
+function Description() {
   return (
     <StyledDescription>
       <Logo />
@@ -32,7 +30,5 @@ function Description(props) {
     </StyledDescription>
   )
 }
-
-Description.propTypes = {}
 
 export default Description;

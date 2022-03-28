@@ -28,6 +28,7 @@ function Label(props) {
 Label.propTypes = {
   labelText: PropTypes.string,
   color: PropTypes.string,
-}
+  inputFor: PropTypes.string,
+};
 
 export default Label;

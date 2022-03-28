@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 import RowForm from 'components/atoms/RowForm';
 import FildsetInput from 'components/molecules/FildsetInput';
@@ -24,7 +23,7 @@ const StyledForm = styled.form`
   row-gap: 25px;
 `
 
-function Form(props) {
+function Form() {
   const data = useSelector( state => state.manageForm );
   const { sendReady } = useSelector( state => state.sendState );
   const dispatch = useDispatch();
@@ -58,7 +57,5 @@ function Form(props) {
     </StyledForm>
   )
 }
-
-Form.propTypes = {}
 
 export default Form;

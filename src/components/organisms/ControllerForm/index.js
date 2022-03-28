@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { readyStateForm, resetSendState } from 'store/sendState/action';
 
 function ControllerForm(props) {
@@ -26,6 +25,4 @@ function ControllerForm(props) {
   )
 }
 
-ControllerForm.propTypes = {}
-
-export default ControllerForm
+export default ControllerForm;

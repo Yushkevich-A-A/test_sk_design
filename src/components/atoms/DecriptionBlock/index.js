@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledDecriptionBlock = styled.div`
@@ -16,6 +15,4 @@ function DecriptionBlock(props) {
   )
 }
 
-DecriptionBlock.propTypes = {}
-
-export default DecriptionBlock
+export default DecriptionBlock;

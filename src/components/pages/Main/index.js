@@ -1,5 +1,4 @@
-import React, { Children } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 import Description from 'components/organisms/Description';
 import Form from 'components/organisms/Form';
@@ -20,7 +19,7 @@ const StiledMain = styled.div`
   }
 `
 
-function Main(props) {
+function Main() {
   return (
      <StiledMain>
        <Description />
@@ -30,7 +29,5 @@ function Main(props) {
      </StiledMain>
   )
 }
-
-Main.propTypes = {}
 
 export default Main;

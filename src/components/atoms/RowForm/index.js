@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledRowForm = styled.div`
@@ -28,6 +27,4 @@ function RowForm(props) {
   )
 }
 
-RowForm.propTypes = {}
-
-export default RowForm
+export default RowForm;

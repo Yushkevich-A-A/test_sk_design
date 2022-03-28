@@ -19,6 +19,8 @@ function Error(props) {
   )
 }
 
-Error.propTypes = {}
+Error.propTypes = {
+  errorText: PropTypes.string,
+}
 
 export default Error;

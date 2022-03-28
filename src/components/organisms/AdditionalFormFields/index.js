@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import OpenArrow from 'components/atoms/OpenArrow';
 
@@ -44,6 +43,4 @@ function AdditionalFormFields(props) {
   )
 }
 
-AdditionalFormFields.propTypes = {}
-
-export default AdditionalFormFields
+export default AdditionalFormFields;

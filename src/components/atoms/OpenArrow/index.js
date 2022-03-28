@@ -17,11 +17,11 @@ const StyledOpenArrow = styled.img`
   display: block;
 
   &.open {
-    animation: open-arrow 0.2s linear forwards;
+    animation: open-arrow 0.1s linear forwards;
   }
 
   &.close {
-    animation: close-arrow 0.2s linear forwards;
+    animation: close-arrow 0.1s linear forwards;
   }
 `
 
@@ -33,6 +33,8 @@ function OpenArrow(props) {
   )
 }
 
-OpenArrow.propTypes = {}
+OpenArrow.propTypes = {
+  type: PropTypes.string,
+}
 
-export default OpenArrow
+export default OpenArrow;

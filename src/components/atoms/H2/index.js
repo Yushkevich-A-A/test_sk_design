@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledH2 = styled.h2`
@@ -21,6 +20,4 @@ function H2(props) {
   )
 }
 
-H2.propTypes = {}
-
-export default H2
+export default H2;
