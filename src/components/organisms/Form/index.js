@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RowForm from 'components/atoms/RowForm';
@@ -9,7 +9,9 @@ import cities from 'assets/JSONData/cities.json';
 import sources from 'assets/JSONData/sources.json';
 import dataDecorator from 'lib/dataDecorator';
 import ButtonState from '../ButtonState';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkValidateAllRequiredFields } from 'store/form/actions';
+import { sentDataToServer } from 'store/sendState/action';
 
 const StyledForm = styled.form`
   max-width: 440px;
@@ -19,30 +21,31 @@ const StyledForm = styled.form`
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  row-gap: 25px;
 `
 
 function Form(props) {
-  const { sendReady } = useSelector( state => state.sendState )
-
+  const data = useSelector( state => state.manageForm );
+  const { sendReady } = useSelector( state => state.sendState );
+  const dispatch = useDispatch();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (!sendReady) {
-      return;
+      return dispatch(checkValidateAllRequiredFields(data));
     }
-    console.log('выполняем отправку на сервер');
+    dispatch(sentDataToServer(data));
   }
 
   return (
     <StyledForm onSubmit={handleSubmitForm}>
       <RowForm>
-        <FildsetInput placeholderText='Иван' labelText='Ваше имя *' name='name' required={true} validitylength={2} />
-        <FildsetInput placeholderText='+7 (000) 000-00-00' labelText='Номер телефона *' name='phone' required={true} validitylength={11}/>
+        <FildsetInput placeholderText='Иван' labelText='Ваше имя *' name='name' required={true} regValue={/.{2}/} messageError={'введите больше 2х символов'} />
+        <FildsetInput placeholderText='+7 (000) 000-00-00' labelText='Номер телефона *' name='phone' required={true} isPhone={true} regValue={/(.*\d.*){11}/} messageError={'номер не корректный'}/>
       </RowForm>
       <RowForm>
-        <FildsetInput placeholderText='example@skdesign.ru' labelText='E-mail *' name='mail' required={true} validitylength={11}/>
-        <FildsetInput placeholderText='instagram.com/skde…' labelText='Ссылка на профиль *' name='link' required={true} validitylength={3}/>
+        <FildsetInput placeholderText='example@skdesign.ru' labelText='E-mail *' name='mail' required={true} regValue={/.+@.+\..+/} messageError={'введите корректный e-mail'}/>
+        <FildsetInput placeholderText='instagram.com/skde…' labelText='Ссылка на профиль *' name='link' required={true} regValue={/.{3}/} messageError={'введите корректную ссылку'}/>
       </RowForm>
       <FildsetDropdown placeholderText='Выберите город *' list={cities} name='city' required={true}/> 
 

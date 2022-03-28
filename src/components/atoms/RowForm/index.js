@@ -5,8 +5,17 @@ import styled from 'styled-components';
 const StyledRowForm = styled.div`
   display: flex;
   justify-content: center;
-  align-itens: center;
-  gap: 20px;
+  align-items: center;
+  row-gap: 25px;
+  column-gap: 20px;
+
+  fieldset {
+    width: 100%;
+  }
+
+  @media (max-width: 425px) {
+    flex-direction: column;
+  }
 `
 
 function RowForm(props) {

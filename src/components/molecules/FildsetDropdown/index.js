@@ -9,7 +9,6 @@ import DropdownList from '../DropdownList';
 import { editItemForm, setErrorField, setReadyField } from 'store/form/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
-
 const StyleFildsetDropdown = styled.fieldset`
   position: relative;
   border: 2px solid ${ props => props.colorBorder || '#E3E3E3'};
@@ -41,7 +40,7 @@ function FildsetDropdown(props) {
       return setColorState('#EB5E55'); 
     } 
     setColorState(null);
-  }, [openList]);
+  }, [openList, dataField]);
 
   const handleClick = () => {
     openList ? setArrowType('close') : setArrowType('open');
@@ -50,7 +49,9 @@ function FildsetDropdown(props) {
   }
 
   const handleSelectItem = (item) => {
+    openList ? setArrowType('close') : setArrowType('open');
     dispatch(editItemForm(name, item));
+    setOpenList(!openList);
     handleValidate(item);
   }
 
@@ -59,15 +60,15 @@ function FildsetDropdown(props) {
       return;
     }
     if (item === '') {
-      return dispatch(setErrorField(name, 'обязательное поле'))
+      return dispatch(setErrorField(name, 'обязательное поле'));
     }
     dispatch(setReadyField(name));
   }
 
   return (
-    <StyleFildsetDropdown colorBorder={colorState} onClick={handleClick}>
+    <StyleFildsetDropdown colorBorder={colorState}>
       {openList && <Label labelText={placeholderText} color={colorState}></Label>}
-      <WrapperContent>
+      <WrapperContent onClick={handleClick}>
         { !openList && <TextDropdown text={ dataField.value || placeholderText}/>}
         { openList && <TextDropdown text={ dataField.value || ''}/>}
         <OpenArrow type={arrowType}/>

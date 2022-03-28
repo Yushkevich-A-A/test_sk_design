@@ -7,17 +7,21 @@ import Label from 'components/atoms/Label';
 import Error from 'components/atoms/Error';
 import { useDispatch, useSelector } from 'react-redux';
 import { editItemForm, resetErrorField, setErrorField, setReadyField } from 'store/form/actions';
+import ReactInputMask from 'react-input-mask';
 
 const StyledFildsetInput = styled.fieldset`
   position: relative;
   border: 2px solid ${ props => props.colorBorder || '#E3E3E3'};
   border-radius: 8px;
   padding: 14px 15px;
-`
-
+  
+  input {
+    width: 100%;
+  }
+`;
 
 function FildsetInput(props) {
-  const { placeholderText, labelText, name, required, validitylength } = props;
+  const { placeholderText, labelText, name, required, regValue, messageError, isPhone } = props;
   const [ action, setAction ] = useState(false);
   const [ colorState, setColorState ] = useState(null);
   const { [name]: dataField } = useSelector( store => store.manageForm );
@@ -32,7 +36,7 @@ function FildsetInput(props) {
       return setColorState('#EB5E55'); 
     } 
     setColorState(null);
-  }, [action]);
+  }, [action, dataField]);
 
   const handleChange = (e) => {
     dispatch(editItemForm(name, e.target.value));
@@ -45,18 +49,20 @@ function FildsetInput(props) {
     }
   }
 
-  const handleBlur = () => {
+  const handleBlur = (e) => {
+    const value = e.target.value;
+
     setAction(false);
     if (!required) {
       return;
     }
 
-    if (dataField.value === '') {
-      return dispatch(setErrorField(name, 'обязательное поле'))
+    if (value === '') {
+      return dispatch(setErrorField(name, 'обязательное поле'));
     }
-    
-    if (dataField.value.length < validitylength) {
-      return dispatch(setErrorField(name, 'введите полные данные'))
+
+    if (!regValue.test(value)) {
+      return dispatch(setErrorField(name, messageError))
     }
 
     dispatch(setReadyField(name));
@@ -64,15 +70,19 @@ function FildsetInput(props) {
 
   return (
     <StyledFildsetInput colorBorder={colorState} onFocus={handleFocus} onBlur={handleBlur}>
-      <Label labelText={labelText} 
-        color={colorState} 
-        inputFor={idElement}
-        ></Label>
-      <Input placeholderText={placeholderText} 
-        name={name} 
-        inputFor={idElement} 
-        handleChange={handleChange} 
-        value={dataField.value}/>
+      <Label labelText={labelText} color={colorState} inputFor={idElement}/>
+        {isPhone && <ReactInputMask mask={'+7\\(999)-999-99-99'} maskChar=''
+          placeholder={placeholderText} 
+          name={name}
+          id={idElement}
+          value={dataField.value}
+          onChange={handleChange}
+          />}
+        {!isPhone && <Input placeholderText={placeholderText} 
+          name={name}
+          inputFor={idElement} 
+          handleChange={handleChange} 
+          value={dataField.value}/>}
       { dataField.error && <Error errorText={dataField.error}/>}
     </StyledFildsetInput>
   )

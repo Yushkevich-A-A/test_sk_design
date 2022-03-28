@@ -6,7 +6,7 @@ import OpenArrow from 'components/atoms/OpenArrow';
 const StyledAdditionalFormFields = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  row-gap: 25px;
 `
 
 const StyledToggleBlock = styled.div`
@@ -33,7 +33,7 @@ function AdditionalFormFields(props) {
     <StyledAdditionalFormFields>
       <StyledToggleBlock onClick={handleClick}>
         <StyledToggleBlockText>
-          Скрыть дополнительные поля
+          { isOpen ? 'Скрыть дополнительные поля' : 'Показать дополнительные поля'}
         </StyledToggleBlockText>
         <OpenArrow type={blockState} />
       </StyledToggleBlock>

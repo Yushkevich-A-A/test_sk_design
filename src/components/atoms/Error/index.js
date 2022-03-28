@@ -8,7 +8,7 @@ const StyledError = styled.div`
   color: #EB5E55;
   bottom: -16px;
   z-index: -1;
-
+  white-space: nowrap;
 `
 
 function Error(props) {
