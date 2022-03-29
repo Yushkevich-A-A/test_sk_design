@@ -8,6 +8,7 @@ import OpenArrow from 'components/atoms/OpenArrow';
 import DropdownList from '../DropdownList';
 import { editItemForm, setErrorField, setReadyField } from 'store/form/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 } from 'uuid';
 
 const StyleFildsetDropdown = styled.fieldset`
   position: relative;
@@ -31,15 +32,25 @@ function FildsetDropdown(props) {
   const { [name]: dataField } = useSelector( store => store.manageForm );
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    document.addEventListener('click', closeList);
+    return () => document.removeEventListener('click', closeList);
+  }, []);
 
   useEffect(() => {
     if (openList) {
-      return setColorState('#0086A8'); 
+      setColorState('#0086A8'); 
+    } else if (dataField.error) {
+      setColorState('#EB5E55'); 
+    } else {
+      setColorState(null);
     }
-    if (dataField.error) {
-      return setColorState('#EB5E55'); 
-    } 
-    setColorState(null);
+
+    if ( !openList && arrowType === '') {
+      return;
+    };
+    openList ? setArrowType('close') : setArrowType('open');
+    
   }, [openList, dataField]);
 
   const handleClick = () => {
@@ -54,7 +65,6 @@ function FildsetDropdown(props) {
   }
 
   const observeOpenList = () => {
-    openList ? setArrowType('close') : setArrowType('open');
     setOpenList(!openList);
   }
 
@@ -68,8 +78,14 @@ function FildsetDropdown(props) {
     dispatch(setReadyField(name));
   }
 
+  const closeList = (e) => {
+    if (!e.target.closest(`.${name}`)) {
+      setOpenList(false);
+    }
+  }
+
   return (
-    <StyleFildsetDropdown colorBorder={colorState}>
+    <StyleFildsetDropdown colorBorder={colorState} className={name}>
       {openList && <Label labelText={placeholderText} color={colorState}></Label>}
       <WrapperContent onClick={handleClick}>
         { !openList && <TextDropdown text={ dataField.value || placeholderText}/>}

@@ -27,7 +27,7 @@ function ItemDropdown(props) {
 }
 
 ItemDropdown.propTypes = {
-  item: PropTypes.object,
+  item: PropTypes.string,
   handleClick: PropTypes.func
 };
 
