@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import OpenArrow from 'components/atoms/OpenArrow';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleAdditionalMenu } from 'store/additionalMenu/actions';
 
 const StyledAdditionalFormFields = styled.div`
   display: flex;
@@ -20,12 +22,19 @@ const StyledToggleBlockText = styled.div`
 `
 
 function AdditionalFormFields(props) {
-  const [ isOpen, setIsOpen ] = useState(false);
+  const { isOpen } = useSelector( state => state.openAdditionalMenu );
+  const dispatch = useDispatch();
   const [ blockState, setBlockState ] = useState(null);
 
+  useEffect(() => {
+    if (!isOpen && !blockState ) {
+      return;
+    };
+    !isOpen ? setBlockState('close') : setBlockState('open');
+  }, [isOpen])
+
   const handleClick = () => {
-    isOpen ? setBlockState('close') : setBlockState('open');
-    setIsOpen(!isOpen);
+    dispatch(toggleAdditionalMenu());
   }
 
   return (

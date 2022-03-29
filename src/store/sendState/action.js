@@ -1,4 +1,5 @@
 import prepareDataToSend from "lib/prepareDataToSend";
+import { resetAdditionalMenu } from "store/additionalMenu/actions";
 import { resetForm } from "store/form/actions";
 
 export const readyStateForm = () => {
@@ -19,6 +20,7 @@ export const sentDataToServer = (data) => async (dispatch, getState) => {
   setTimeout(() => {
     console.log(prepandedData);
     dispatch(resetSendState());
+    dispatch(resetAdditionalMenu());
     dispatch(resetForm());
   }, 1000 * 2);
 }
