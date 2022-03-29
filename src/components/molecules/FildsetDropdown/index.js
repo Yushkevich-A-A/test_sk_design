@@ -8,7 +8,6 @@ import OpenArrow from 'components/atoms/OpenArrow';
 import DropdownList from '../DropdownList';
 import { editItemForm, setErrorField, setReadyField } from 'store/form/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 } from 'uuid';
 
 const StyleFildsetDropdown = styled.fieldset`
   position: relative;
