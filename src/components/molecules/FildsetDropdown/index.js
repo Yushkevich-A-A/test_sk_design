@@ -48,7 +48,7 @@ function FildsetDropdown(props) {
     if ( !openList && arrowType === '') {
       return;
     };
-    openList ? setArrowType('close') : setArrowType('open');
+    !openList ? setArrowType('close') : setArrowType('open');
     
   }, [openList, dataField]);
 
